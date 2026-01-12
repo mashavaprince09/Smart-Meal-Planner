@@ -1,0 +1,42 @@
+<div class = "col-md-10 offset-md-1">
+  <h3>
+    Search For Recipes
+  </h3>
+
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="query">Query:</label>
+      <input type="text" class="form-control" id="query" [(ngModel)]="searchRequest.query" name="query">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+
+  <table class = "table table-striped">
+    <thead>
+    <tr>
+      <th>id</th>
+      <th>title</th>
+      <th>image</th>
+    </tr>
+    </thead>
+
+    <tbody>
+      <tr *ngFor="let recipe of recipes; trackBy: trackById" (click) = "viewInstructions(recipe.id)" style="cursor: pointer">
+        <td>{{ recipe.id }}</td>
+        <td>{{ recipe.title }}</td>
+        <td>
+          <img
+            *ngIf="recipe.image"
+            [ngSrc]="recipe.image"
+            class="img-fluid"
+            alt="{{ recipe.title }}"
+            width="312"
+            height="231"
+          />
+        </td>
+      </tr>
+    </tbody>
+
+
+  </table>
+</div>
