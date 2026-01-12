@@ -3,16 +3,24 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
-import { Home } from './home/home';
+import { Home } from './components/home/home';
+import { Recipe } from './components/recipe/recipe';
+import {FormsModule} from '@angular/forms';
+import {NgOptimizedImage} from '@angular/common';
+import { Instructions } from './components/instructions/instructions';
 
 @NgModule({
   declarations: [
     App,
-    Home
+    Home,
+    Recipe,
+    Instructions
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FormsModule,
+    NgOptimizedImage
   ],
   providers: [
     provideBrowserGlobalErrorListeners(),
