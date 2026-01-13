@@ -25,7 +25,7 @@ export class Recipe implements OnInit{
   }
 
   onSubmit(): void {
-    this.recipeService.searchRecipeTest(this.searchRequest).subscribe({
+    this.recipeService.searchRecipe(this.searchRequest).subscribe({
     next: (response) => {
       this.response = response;
       this.recipes = response.results;
@@ -44,7 +44,6 @@ export class Recipe implements OnInit{
   }
 
   viewInstructions(recipeId: number){
-    console.log('viewInstructions', recipeId);
     this.router.navigate(['/instructions', recipeId]);
   }
 
