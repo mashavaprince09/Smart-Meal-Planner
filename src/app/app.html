@@ -1,21 +1,32 @@
-<nav class = "navbar navbar-expand-sm bg-primary navbar-dark">
-  <ul class = "navbar-nav">
-    <li class="nav-item">
-      <a routerLink = "home" routerLinkActive="active" class = "nav-link">
-        Home
-      </a>
-    </li>
-  </ul>
-</nav>
+<div class="page-wrapper">
 
-<h1 class="text-center">{{title()}}</h1>
-<div class = "container">
-  <router-outlet></router-outlet>
+  <nav class="navbar navbar-expand-sm bg-primary navbar-dark">
+    <ul class="navbar-nav">
+      <li class="nav-item">
+        <a routerLink="home" routerLinkActive="active" class="nav-link">
+          Home
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="recipe" routerLinkActive="active" class="nav-link">
+          Recipes
+        </a>
+      </li>
+    </ul>
+  </nav>
+
+  <main class="page-content">
+    <h1 class="text-center">{{ title() }}</h1>
+    <div class="container">
+      <router-outlet></router-outlet>
+    </div>
+  </main>
+
+  <footer class="navbar bg-primary navbar-dark footer">
+    <div class="container">
+      <span>Smart-Meal-Planner</span>
+      <span>All Rights Reserved 2026</span>
+    </div>
+  </footer>
+
 </div>
-
-<footer class = "footer">
-  <div class = "container">
-    <span>All Rights Reserved 2026</span>
-  </div>
-
-</footer>

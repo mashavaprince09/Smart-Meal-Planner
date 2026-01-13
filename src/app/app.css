@@ -1,0 +1,20 @@
+html, body {
+  height: 100%;
+  margin: 0;
+}
+
+.page-wrapper {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.page-content {
+  flex: 1;
+}
+
+.footer {
+  margin-top: auto;
+  padding: 1rem;
+  text-align: center;
+}
