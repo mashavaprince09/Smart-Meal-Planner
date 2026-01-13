@@ -1,9 +1,59 @@
-<div *ngFor="let group of instructions">
+<div *ngFor="let group of instructions" class="instruction-group">
+
+  <h2 class="text-center">
+    Instructions
+  </h2>
+
   <h3 *ngIf="group.name">{{ group.name }}</h3>
 
-  <ol>
-    <li *ngFor="let step of group.steps">
-      {{ step.step }}
+  <ol class="instruction-list">
+    <li *ngFor="let step of group.steps" class="list-group-item">
+
+      <div class="step-header">
+        <span class="step-number">Step {{ step.number }}</span>
+      </div>
+
+      <p class="step-text">
+        {{ step.step }}
+      </p>
+
+      <div *ngIf="step.length" class="step-time">
+        ⏱ {{ step.length.number }} {{ step.length.unit }}
+      </div>
+
+      <div *ngIf="step.ingredients?.length" class="step-section">
+        <strong>Ingredients</strong>
+        <div class="item-row">
+          <div *ngFor="let ingredient of step.ingredients" class="item">
+            <img
+              class="item-image ingredient-image"
+              [src]="'https://spoonacular.com/cdn/ingredients_100x100/' + ingredient.image"
+              alt="{{ ingredient.name }}"
+            />
+            <span class="item-label">{{ ingredient.name }}</span>
+          </div>
+        </div>
+      </div>
+
+      <div *ngIf="step.equipment?.length" class="step-section">
+        <strong>Equipment</strong>
+        <div class="item-row">
+          <div *ngFor="let eq of step.equipment" class="item">
+            <img
+              class="item-image equipment-image"
+              [src]="'https://spoonacular.com/cdn/equipment_100x100/' + eq.image"
+              alt="{{ eq.name }}"
+            />
+            <span class="item-label">
+              {{ eq.name }}
+              <span *ngIf="eq.temperature">
+                ({{ eq.temperature.number }}° {{ eq.temperature.unit }})
+              </span>
+            </span>
+          </div>
+        </div>
+      </div>
+
     </li>
   </ol>
 </div>
