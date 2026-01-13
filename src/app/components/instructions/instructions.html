@@ -1,1 +1,9 @@
-<p>instructions works!</p>
+<div *ngFor="let group of instructions">
+  <h3 *ngIf="group.name">{{ group.name }}</h3>
+
+  <ol>
+    <li *ngFor="let step of group.steps">
+      {{ step.step }}
+    </li>
+  </ol>
+</div>
