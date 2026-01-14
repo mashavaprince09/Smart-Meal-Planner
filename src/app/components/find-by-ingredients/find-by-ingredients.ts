@@ -1,5 +1,5 @@
 import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
-import {ActivatedRoute} from '@angular/router';
+import {Router} from '@angular/router';
 import {FindByIngredientsService} from '../../services/find-by-ingredients-service';
 import {FindByIngredientsRequest} from '../../models/requests/find-by-ingredients-request';
 import {FindByIngredientsResponse} from '../../models/responses/find-by-ingredients-response';
@@ -17,7 +17,7 @@ export class FindByIngredients implements OnInit {
 
   findByIngredientsResponse: FindByIngredientsResponse[] = [];
 
-  constructor(private route: ActivatedRoute, private findByIngredientsService: FindByIngredientsService, private cdr: ChangeDetectorRef) {
+  constructor(private findByIngredientsService: FindByIngredientsService, private cdr: ChangeDetectorRef, private router: Router) {
 
   }
 
@@ -25,10 +25,13 @@ export class FindByIngredients implements OnInit {
 
   }
 
+  viewInstructions(recipeId: number){
+    this.router.navigate(['/instructions', recipeId]);
+  }
 
   onSubmit() {
     console.log(this.findByIngredientsRequest);
-    this.findByIngredientsService.findByIngredientsTest(this.findByIngredientsRequest).subscribe({
+    this.findByIngredientsService.findByIngredients(this.findByIngredientsRequest).subscribe({
       next:(response) => {
         this.findByIngredientsResponse = response;
         this.cdr.detectChanges();
