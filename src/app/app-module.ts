@@ -8,13 +8,15 @@ import { Recipe } from './components/recipe/recipe';
 import {FormsModule} from '@angular/forms';
 import {NgOptimizedImage} from '@angular/common';
 import { Instructions } from './components/instructions/instructions';
+import { FindByIngredients } from './components/find-by-ingredients/find-by-ingredients';
 
 @NgModule({
   declarations: [
     App,
     Home,
     Recipe,
-    Instructions
+    Instructions,
+    FindByIngredients
   ],
   imports: [
     BrowserModule,

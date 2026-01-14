@@ -3,12 +3,14 @@ import { RouterModule, Routes } from '@angular/router';
 import {Home} from './components/home/home';
 import {Recipe} from './components/recipe/recipe';
 import {Instructions} from './components/instructions/instructions';
+import {FindByIngredients} from './components/find-by-ingredients/find-by-ingredients';
 
 const routes: Routes = [
   {path: 'home', component: Home},
   {path: '', redirectTo: 'home', pathMatch: "full"},
   {path: 'recipe', component: Recipe},
-  {path: 'instructions/:id', component: Instructions }
+  {path: 'instructions/:id', component: Instructions },
+  {path: 'findByIngredients', component: FindByIngredients }
 ];
 
 @NgModule({
