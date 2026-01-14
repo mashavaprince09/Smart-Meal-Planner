@@ -3,6 +3,8 @@ import {HttpClient} from '@angular/common/http';
 import {FindByIngredientsRequest} from '../models/requests/find-by-ingredients-request';
 import {FindByIngredientsResponse} from '../models/responses/find-by-ingredients-response';
 import {Observable, of} from 'rxjs';
+import {environment} from '../../environments/environment';
+import {InstructionsResponse} from '../models/responses/instructions-response';
 
 @Injectable({
   providedIn: 'root',
@@ -173,6 +175,19 @@ export class FindByIngredientsService {
 
   findByIngredientsTest(findByIngredientsRequest: FindByIngredientsRequest): Observable<FindByIngredientsResponse[]>{
     return of(this.findByIngredientsResponseTest);
+  }
+
+  findByIngredients(findByIngredientsRequest: FindByIngredientsRequest): Observable<FindByIngredientsResponse[]>{
+    const url = `${environment.apiBaseUrls.spoonacular}/recipes/findByIngredients`;
+    console.log('InstructionsService findByIngredients', url);
+    return this.httpClient.get<FindByIngredientsResponse[]>(url, {
+      params: {
+        apiKey: environment.apiKeys.spoonacular,
+        ingredients: findByIngredientsRequest.ingredients,
+        number: findByIngredientsRequest.number,
+        ranking: findByIngredientsRequest.ranking,
+      }
+    });
   }
 
 }
