@@ -4,7 +4,6 @@ import {FindByIngredientsRequest} from '../models/requests/find-by-ingredients-r
 import {FindByIngredientsResponse} from '../models/responses/find-by-ingredients-response';
 import {Observable, of} from 'rxjs';
 import {environment} from '../../environments/environment';
-import {InstructionsResponse} from '../models/responses/instructions-response';
 
 @Injectable({
   providedIn: 'root',
