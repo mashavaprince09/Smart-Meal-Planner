@@ -1,0 +1,80 @@
+<div class = "col-md-10 offset-md-1">
+  <h2 class="text-center">
+    Search For Recipes
+  </h2>
+
+  <form (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="ingredients">Ingredients (comma-separated):</label>
+      <input type="text" placeholder="apples,flour,sugar" class="form-control" id="ingredients" [(ngModel)]="findByIngredientsRequest.ingredients" name="ingredients">
+      <label for="number">Maximum number of recipes to return (between 1 and 100):</label>
+      <input type="text" class="form-control" id="number" [(ngModel)]="findByIngredientsRequest.number" name="number">
+      <label for="ranking">Ranking (1 to maximize used ingredients | 2 to minimize missing ingredients):</label>
+      <input type="text" class="form-control" id="ranking" [(ngModel)]="findByIngredientsRequest.ranking" name="ranking">
+    </div>
+    <button type="submit" class="btn btn-primary">Search</button>
+  </form>
+
+  <div class="recipes-container" *ngIf="findByIngredientsResponse.length > 0">
+
+    <div class="recipe-card" *ngFor="let recipe of findByIngredientsResponse">
+
+      <!-- Recipe Header -->
+      <div class="recipe-header">
+        <img class="recipe-image" [src]="recipe.image" [alt]="recipe.title">
+        <div class="recipe-info">
+          <h2>{{ recipe.title }}</h2>
+          <p class="likes">❤️ {{ recipe.likes }} likes</p>
+          <p class="counts">
+            ✔ Used: {{ recipe.usedIngredientCount }} |
+            ❌ Missed: {{ recipe.missedIngredientCount }}
+          </p>
+        </div>
+      </div>
+
+      <!-- Used Ingredients -->
+      <div class="ingredients-section" *ngIf="recipe.usedIngredients.length > 0">
+        <h3>Used Ingredients</h3>
+        <div class="ingredients-grid">
+          <div class="ingredient-card" *ngFor="let ing of recipe.usedIngredients">
+            <img [src]="ing.image" [alt]="ing.name">
+            <p class="ingredient-name">{{ ing.name }}</p>
+            <p class="ingredient-amount">{{ ing.original }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Missed Ingredients -->
+      <div class="ingredients-section" *ngIf="recipe.missedIngredients.length > 0">
+        <h3>Missed Ingredients</h3>
+        <div class="ingredients-grid">
+          <div class="ingredient-card missed" *ngFor="let ing of recipe.missedIngredients">
+            <img [src]="ing.image" [alt]="ing.name">
+            <p class="ingredient-name">{{ ing.name }}</p>
+            <p class="ingredient-amount">{{ ing.original }}</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Unused Ingredients -->
+      <div class="ingredients-section" *ngIf="recipe.unusedIngredients.length > 0">
+        <h3>Unused Ingredients</h3>
+        <div class="ingredients-grid">
+          <div class="ingredient-card unused" *ngFor="let ing of recipe.unusedIngredients">
+            <img [src]="ing.image" [alt]="ing.name">
+            <p class="ingredient-name">{{ ing.name }}</p>
+            <p class="ingredient-amount">{{ ing.original }}</p>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Empty State -->
+  <p class="empty-state" *ngIf="findByIngredientsResponse.length === 0">
+    No recipes found. Try different ingredients.
+  </p>
+
+
+</div>
