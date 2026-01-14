@@ -19,20 +19,18 @@
 
     <div class="recipe-card" *ngFor="let recipe of findByIngredientsResponse">
 
-      <!-- Recipe Header -->
-      <div class="recipe-header">
+      <div class="recipe-header" (click) = "viewInstructions(recipe.id)" style="cursor: pointer">
         <img class="recipe-image" [src]="recipe.image" [alt]="recipe.title">
         <div class="recipe-info">
           <h2>{{ recipe.title }}</h2>
           <p class="likes">❤️ {{ recipe.likes }} likes</p>
           <p class="counts">
-            ✔ Used: {{ recipe.usedIngredientCount }} |
-            ❌ Missed: {{ recipe.missedIngredientCount }}
+            Used: {{ recipe.usedIngredientCount }} |
+            Missed: {{ recipe.missedIngredientCount }}
           </p>
         </div>
       </div>
 
-      <!-- Used Ingredients -->
       <div class="ingredients-section" *ngIf="recipe.usedIngredients.length > 0">
         <h3>Used Ingredients</h3>
         <div class="ingredients-grid">
@@ -44,7 +42,6 @@
         </div>
       </div>
 
-      <!-- Missed Ingredients -->
       <div class="ingredients-section" *ngIf="recipe.missedIngredients.length > 0">
         <h3>Missed Ingredients</h3>
         <div class="ingredients-grid">
@@ -56,7 +53,6 @@
         </div>
       </div>
 
-      <!-- Unused Ingredients -->
       <div class="ingredients-section" *ngIf="recipe.unusedIngredients.length > 0">
         <h3>Unused Ingredients</h3>
         <div class="ingredients-grid">
@@ -71,7 +67,6 @@
     </div>
   </div>
 
-  <!-- Empty State -->
   <p class="empty-state" *ngIf="findByIngredientsResponse.length === 0">
     No recipes found. Try different ingredients.
   </p>
