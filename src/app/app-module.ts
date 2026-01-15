@@ -9,6 +9,7 @@ import {FormsModule} from '@angular/forms';
 import {NgOptimizedImage} from '@angular/common';
 import { Instructions } from './components/instructions/instructions';
 import { FindByIngredients } from './components/find-by-ingredients/find-by-ingredients';
+import { GenerateMealPlan } from './components/generate-meal-plan/generate-meal-plan';
 
 @NgModule({
   declarations: [
@@ -16,7 +17,8 @@ import { FindByIngredients } from './components/find-by-ingredients/find-by-ingr
     Home,
     Recipe,
     Instructions,
-    FindByIngredients
+    FindByIngredients,
+    GenerateMealPlan
   ],
   imports: [
     BrowserModule,
