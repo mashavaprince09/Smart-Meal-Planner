@@ -4,13 +4,15 @@ import {Home} from './components/home/home';
 import {Recipe} from './components/recipe/recipe';
 import {Instructions} from './components/instructions/instructions';
 import {FindByIngredients} from './components/find-by-ingredients/find-by-ingredients';
+import {GenerateMealPlan} from './components/generate-meal-plan/generate-meal-plan';
 
 const routes: Routes = [
   {path: 'home', component: Home},
   {path: '', redirectTo: 'home', pathMatch: "full"},
   {path: 'recipe', component: Recipe},
   {path: 'instructions/:id', component: Instructions },
-  {path: 'findByIngredients', component: FindByIngredients }
+  {path: 'findByIngredients', component: FindByIngredients },
+  {path: 'generateMealPlan', component: GenerateMealPlan },
 ];
 
 @NgModule({
