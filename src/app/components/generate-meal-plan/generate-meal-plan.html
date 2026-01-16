@@ -1,1 +1,127 @@
-<p>generate-meal-plan works!</p>
+<div class="col-md-10 offset-md-1">
+  <h2 class="text-center">Generate a Meal Plan</h2>
+
+  <form (ngSubmit)="onSubmit()" class="meal-form">
+    <div class="form-group">
+      <label>Time Frame</label>
+      <input
+        type="text"
+        class="form-control"
+        placeholder="day | week"
+        [(ngModel)]="generateMealPlanRequest.timeFrame"
+        name="timeFrame"
+      />
+
+      <label>Target Calories (per day)</label>
+      <input
+        type="number"
+        class="form-control"
+        [(ngModel)]="generateMealPlanRequest.targetCalories"
+        name="targetCalories"
+      />
+
+      <label>Diet (Gluten Free | Vegan | Vegetarian | Paleo | Ketogenic | Lacto-Vegetarian | Ovo-Vegetarian | Pescetarian | Primal | Low FODMAP | Whole30)</label>
+      <input
+        type="text"
+        class="form-control"
+        [(ngModel)]="generateMealPlanRequest.diet"
+        name="diet"
+      />
+
+      <label>Exclude (comma-separated)</label>
+      <input
+        type="text"
+        placeholder="shellfish, olives"
+        class="form-control"
+        [(ngModel)]="generateMealPlanRequest.exclude"
+        name="exclude"
+      />
+    </div>
+
+    <button type="submit" class="btn btn-primary mt-3">Generate</button>
+  </form>
+
+  <div class="meal-plan">
+
+    <ng-container *ngIf="generateMealPlanRequest.timeFrame === 'day' && generateMealPlanDayResponse">
+
+      <div class="nutrients-card">
+        <h4>Daily Nutrients</h4>
+        <div class="nutrient-grid">
+          <div><strong>Calories:</strong> {{ generateMealPlanDayResponse.nutrients.calories | number:'1.0-0' }}</div>
+          <div><strong>Carbs:</strong> {{ generateMealPlanDayResponse.nutrients.carbohydrates | number:'1.0-0' }} g</div>
+          <div><strong>Fat:</strong> {{ generateMealPlanDayResponse.nutrients.fat | number:'1.0-0' }} g</div>
+          <div><strong>Protein:</strong> {{ generateMealPlanDayResponse.nutrients.protein | number:'1.0-0' }} g</div>
+        </div>
+      </div>
+
+      <h4 class="mt-4">Meals</h4>
+
+      <div class="meal-grid">
+        <ng-container *ngFor="let meal of generateMealPlanDayResponse.meals">
+          <ng-container
+            *ngTemplateOutlet="mealCard; context:{ meal: meal }">
+          </ng-container>
+        </ng-container>
+      </div>
+
+    </ng-container>
+
+    <ng-container
+      *ngIf="generateMealPlanRequest.timeFrame === 'week' && generateMealPlanWeekResponse">
+
+      <ng-container *ngFor="let day of [
+    { name: 'Monday', data: generateMealPlanWeekResponse.week.monday },
+    { name: 'Tuesday', data: generateMealPlanWeekResponse.week.tuesday },
+    { name: 'Wednesday', data: generateMealPlanWeekResponse.week.wednesday },
+    { name: 'Thursday', data: generateMealPlanWeekResponse.week.thursday },
+    { name: 'Friday', data: generateMealPlanWeekResponse.week.friday },
+    { name: 'Saturday', data: generateMealPlanWeekResponse.week.saturday },
+    { name: 'Sunday', data: generateMealPlanWeekResponse.week.sunday }
+  ]">
+
+        <h3 class="mt-5">{{ day.name }}</h3>
+
+        <div class="nutrients-card mb-3">
+          <div class="nutrient-grid">
+            <div><strong>Calories:</strong> {{ day.data.nutrients.calories | number:'1.0-0' }}</div>
+            <div><strong>Carbs:</strong> {{ day.data.nutrients.carbohydrates | number:'1.0-0' }} g</div>
+            <div><strong>Fat:</strong> {{ day.data.nutrients.fat | number:'1.0-0' }} g</div>
+            <div><strong>Protein:</strong> {{ day.data.nutrients.protein | number:'1.0-0' }} g</div>
+          </div>
+        </div>
+
+        <div class="meal-grid">
+          <ng-container *ngFor="let meal of day.data.meals">
+            <ng-container
+              *ngTemplateOutlet="mealCard; context:{ meal: meal }">
+            </ng-container>
+          </ng-container>
+        </div>
+
+      </ng-container>
+
+    </ng-container>
+
+
+    <ng-template #mealCard let-meal="meal">
+      <div class="meal-card">
+        <img
+          [src]="'https://img.spoonacular.com/recipes/' + meal.id + '-312x231.' + meal.imageType"
+          alt="{{ meal.title }}"
+        />
+
+        <div class="meal-content">
+          <h5>{{ meal.title }}</h5>
+          <p>Ready in {{ meal.readyInMinutes }} minutes</p>
+          <p>Servings: {{ meal.servings }}</p>
+
+          <a [href]="meal.sourceUrl" target="_blank" class="btn btn-sm btn-outline-primary">
+            View Recipe
+          </a>
+        </div>
+      </div>
+    </ng-template>
+
+  </div>
+</div>
