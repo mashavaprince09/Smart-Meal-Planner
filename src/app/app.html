@@ -14,14 +14,18 @@
       </li>
       <li class="nav-item">
         <a routerLink="findByIngredients" routerLinkActive="active" class="nav-link">
-          FindByIngredients
+          Find By Ingredients
+        </a>
+      </li>
+      <li class="nav-item">
+        <a routerLink="generateMealPlan" routerLinkActive="active" class="nav-link">
+          Generate Meal Plan
         </a>
       </li>
     </ul>
   </nav>
 
   <main class="page-content">
-    <h1 class="text-center">{{ title() }}</h1>
     <div class="container">
       <router-outlet></router-outlet>
     </div>
@@ -29,7 +33,7 @@
 
   <footer class="navbar bg-primary navbar-dark footer">
     <div class="container">
-      <span>Smart-Meal-Planner</span>
+      <span>{{ title() }}</span>
       <span>All Rights Reserved 2026</span>
     </div>
   </footer>
