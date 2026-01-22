@@ -9,6 +9,7 @@ import {GenerateMealPlan} from './components/generate-meal-plan/generate-meal-pl
 const routes: Routes = [
   {path: 'home', component: Home},
   {path: '', redirectTo: 'home', pathMatch: "full"},
+  {path: '**', redirectTo: 'home' },
   {path: 'recipe', component: Recipe},
   {path: 'instructions/:id', component: Instructions },
   {path: 'findByIngredients', component: FindByIngredients },
